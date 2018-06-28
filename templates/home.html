@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <style>
+            ul {
+              flex-wrap: wrap;
+              display: flex;
+            }
+            ul li {
+              flex: 1 0 26%;
+              margin-left: 7%;
+            }
+            body {
+                background-color: #202020;
+            }
+            p {
+                color: #888888;
+            }
+            div {
+                display: block;
+                margin: auto;
+                width: 280px;
+                padding-bottom: 10px;
+            }
+            div img {
+                margin-top: 20px;
+                position: relative;
+                width: 50px;
+            }
+            div input {
+                top: -17px;
+                position: relative;
+                font-size: 16pt;
+            }
+        </style>
+        <script>
+            function search () {
+                window.location.href = './search/' + document.getElementById('search').value;
+            }
+        </script>
+    </head>
+    <title>Manga Directory</title>
+    <div>
+        <input type ='text' id = 'search' oninput="updateQuery(this.value)" />
+        <img src = "./assets/icons/search.png" onclick="search()" />
+    </div>
+    <ul style = "list-style: none;" margin = "0 auto;">
+    {% for chp in chps %}
+        <li>
+            <a href = "./{{ chp[2] }}"><img src = "{{ chp[1] }}" alt="tst" width = "300"/></a>
+            <p> {{ chp[0] }} </p>
+        </li>
+    {% endfor %}
+    </ul>
+</html>
