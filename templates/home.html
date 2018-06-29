@@ -8,49 +8,44 @@
               display: flex;
             }
             ul li {
-              flex: 1 0 26%;
-              margin-left: 7%;
+              flex: 1 0 40%;
+              margin-left: 4%;
+              margin-bottom: 15px;
             }
             body {
-                background-color: #202020;
+                background-color: #eee;
             }
             p {
-                color: #888888;
+                color: #000000;
             }
             div {
                 display: block;
                 margin: auto;
-                width: 280px;
+                width: 300px;
                 padding-bottom: 10px;
-            }
-            div img {
-                margin-top: 20px;
-                position: relative;
-                width: 50px;
-            }
-            div input {
-                top: -17px;
-                position: relative;
-                font-size: 16pt;
+                padding-top: 20px;
             }
         </style>
-        <script>
-            function search () {
-                window.location.href = './search/' + document.getElementById('search').value;
-            }
-        </script>
     </head>
-    <title>Manga Directory</title>
-    <div>
-        <input type ='text' id = 'search' oninput="updateQuery(this.value)" />
-        <img src = "./assets/icons/search.png" onclick="search()" />
-    </div>
-    <ul style = "list-style: none;" margin = "0 auto;">
-    {% for chp in chps %}
-        <li>
-            <a href = "./{{ chp[2] }}"><img src = "{{ chp[1] }}" alt="tst" width = "300"/></a>
-            <p> {{ chp[0] }} </p>
-        </li>
-    {% endfor %}
-    </ul>
+    <title>Translate Manga</title>
+    <body>
+        <div>
+            <form action = "./" method = "POST" enctype = "multipart/form-data">
+                 <input type = "file" multiple size = "50" name = "file" />
+                 <input type = "submit"/>
+              </form>
+        </div>
+        <ul style = "list-style: none;" margin = "0 auto;">
+        {% for pg in lst %}
+            <li>
+                <img src = "{{ pg[0] }}" alt = "error" width = "100%"/>
+            </li>
+            <li>
+                {% for line in pg[1] %}
+                <p> {{ line }} </p>
+                {% endfor %}
+            </li>
+        {% endfor %}
+        </ul>
+    </body>
 </html>

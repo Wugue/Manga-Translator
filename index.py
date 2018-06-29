@@ -15,8 +15,10 @@ OCRurl = 'https://api.ocr.space/parse/image'
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     if request.method == 'POST':
+        data = []
         pages = request.files.getlist('file')
         for page in pages:
+            pageData = []
             page.save('./uploads/' + secure_filename(page.filename))
             fields = {'language':'jpn', 'apikey' : OCRkey}
             files = {
@@ -29,7 +31,11 @@ def home():
                 # response2 = requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=" + urllib.parse.quote_plus(line))
                 # print(line)
                 # print(response2.text)
-                print(requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&ie=UTF-8&q=" + urllib.parse.quote(line)).json()[0][0][0])
+                pageData.append(line)
+                pageData.append(requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&ie=UTF-8&q=" + urllib.parse.quote(line)).json()[0][0][0])
+            data.append(('./uploads/' + secure_filename(page.filename), pageData))
+        #print(data)
+        return render_template('home.html', lst=data)
 
         
     else:
