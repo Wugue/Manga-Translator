@@ -4,6 +4,7 @@ from keys import OCRkey
 from werkzeug.utils import secure_filename
 import requests
 import json
+import urllib
 
 app = Flask(__name__,
     static_url_path='',
@@ -23,7 +24,12 @@ def home():
             }
             response = requests.post(url=OCRurl, data=fields, files=files)
             #print(json.loads(response.json())['ParsedText'])
-            print(response.json()['ParsedResults'][0]['ParsedText'])
+            lines = response.json()['ParsedResults'][0]['ParsedText'].split('\r\n')
+            for line in lines:
+                # response2 = requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&q=" + urllib.parse.quote_plus(line))
+                # print(line)
+                # print(response2.text)
+                print(requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&ie=UTF-8&q=" + urllib.parse.quote(line)).json()[0][0][0])
 
         
     else:
