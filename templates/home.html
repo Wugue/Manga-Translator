@@ -13,7 +13,7 @@
               margin-bottom: 15px;
             }
             body {
-                background-color: #eee;
+                background-color: #fafafa;
             }
             p {
                 color: #000000;
@@ -30,19 +30,21 @@
     <title>Translate Manga</title>
     <body>
         <div>
+            <h3> Upload Manga Pages to Translate </h3>
             <form action = "./" method = "POST" enctype = "multipart/form-data">
-                 <input type = "file" multiple size = "50" name = "file" />
+                 <input type = "file" multiple size = "50" name = "file" accept='image/*' />
                  <input type = "submit"/>
               </form>
         </div>
         <ul style = "list-style: none;" margin = "0 auto;">
         {% for pg in lst %}
             <li>
-                <img src = "{{ pg[0] }}" alt = "error" width = "100%"/>
+                <img src = "{{ pg[0] }}" alt = "error" width = "90%"/>
             </li>
             <li>
                 {% for line in pg[1] %}
-                <p> {{ line }} </p>
+                <p style = "color: #789922;"> {{ line[0] }} </p>
+                <p> {{ line[1] }} </p>
                 {% endfor %}
             </li>
         {% endfor %}
