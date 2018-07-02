@@ -12,6 +12,7 @@ app = Flask(__name__,
     static_folder='.')
 
 OCRurl = 'https://api.ocr.space/parse/image'
+size = 0
 
 def sortLeft(array):
     result = []
@@ -60,8 +61,10 @@ def sortTop(array):
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        shutil.rmtree('./uploads/')
-        os.mkdir('./uploads/')
+        if size > 5000:
+            shutil.rmtree('./uploads/')
+            os.mkdir('./uploads/')
+            size = 0
         data = []
         pages = request.files.getlist('file')
         for page in pages:
@@ -69,6 +72,7 @@ def home():
             if not (pageName.endswith('.png') or pageName.endswith('.jpg') or pageName.endswith('.pdf')):
                 continue
             pageData = []
+            size += 1
             page.save('./uploads/' + pageName)
             fields = {'language':'jpn', 'apikey' : OCRkey, 'isOverlayRequired' : True}
             files = {
