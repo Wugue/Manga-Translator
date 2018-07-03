@@ -1,19 +1,7 @@
-# Flask Manga Reader
+# Manga Machine Translator
 
-A Python Flask application that lets you navigate and read downloaded manga using your browser.
+www.mangamtl.com
 
-![Alt text](assets/example.png?raw=true)
+A website that machine translates manga pages.
 
-### Prerequisites
-
-```bash
-# Install Python 3
-brew install python
-# Install Flask
-pip install Flask
-```
-
-### Instructions
-
-1. Move files from Flask-Manga-Reader into your manga directory
-2. `python index.py` to start the application
+![Alt text](example.png?raw=true)

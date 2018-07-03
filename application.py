@@ -7,7 +7,7 @@ import json
 import urllib
 import shutil
 
-app = Flask(__name__,
+application = Flask(__name__,
     static_url_path='',
     static_folder='.')
 
@@ -58,9 +58,10 @@ def sortTop(array):
             r.pop(0)
     return result
 
-@app.route('/', methods = ['GET', 'POST'])
+@application.route('/', methods = ['GET', 'POST'])
 def home():
     if request.method == 'POST':
+        global size
         if size > 5000:
             shutil.rmtree('./uploads/')
             os.mkdir('./uploads/')
@@ -68,7 +69,7 @@ def home():
         data = []
         pages = request.files.getlist('file')
         for page in pages:
-            pageName = secure_filename(page.filename)
+            pageName = str(size) + '_' + secure_filename(page.filename)
             if not (pageName.endswith('.png') or pageName.endswith('.jpg') or pageName.endswith('.pdf')):
                 continue
             pageData = []
@@ -114,7 +115,7 @@ def home():
             for line in linesTop:
                 #pageData.append(line[2])
                 pageData.append((line[2], requests.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=ja&tl=en&dt=t&ie=UTF-8&q=" + urllib.parse.quote(line[2])).json()[0][0][0]))
-            data.append(('./uploads/' + secure_filename(page.filename), pageData))
+            data.append(('./uploads/' + pageName, pageData))
 
         return render_template('home.html', lst=data)
 
@@ -124,6 +125,6 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
 
     #{'MinTop': 28.0, 'Words': [{'Height': 82.0, 'WordText': 'の', 'Top': 28.0, 'Width': 79.0, 'Left': 103.0}, {'Height': 48.0, 'WordText': 'ん', 'Top': 56.0, 'Width': 45.0, 'Left': 175.0}], 'MaxHeight': 82.0},
