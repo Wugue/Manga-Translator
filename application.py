@@ -125,6 +125,6 @@ def home():
 
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    application.run(debug=False)
 
     #{'MinTop': 28.0, 'Words': [{'Height': 82.0, 'WordText': 'の', 'Top': 28.0, 'Width': 79.0, 'Left': 103.0}, {'Height': 48.0, 'WordText': 'ん', 'Top': 56.0, 'Width': 45.0, 'Left': 175.0}], 'MaxHeight': 82.0},

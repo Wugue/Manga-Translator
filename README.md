@@ -2,6 +2,6 @@
 
 www.mangamtl.com
 
-A website that machine translates manga pages.
+A website that uses OCR.SPACE and Google Translate to machine translate manga pages.
 
 ![Alt text](example.png?raw=true)
