@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="data:,">
+        <style>
+            ul {
+              flex-wrap: wrap;
+              display: flex;
+            }
+            ul li {
+              flex: 1 0 65%;
+              margin-left: 20%;
+              margin-bottom: 15px;
+            }
+            body {
+                background-color: #fafafa;
+            }
+            p {
+                color: #000000;
+            }
+            div {
+                display: block;
+                margin: auto;
+                width: 300px;
+                padding-bottom: 10px;
+                padding-top: 20px;
+            }
+        </style>
+    </head>
+    <title>Translate Manga</title>
+    <body>
+        <div>
+            <h3> Upload Manga Pages to Translate </h3>
+            <form action = "./" method = "POST" enctype = "multipart/form-data">
+                 <input type = "file" multiple size = "50" name = "file" accept='image/*' />
+                 <input type = "submit"/>
+              </form>
+        </div>
+        <ul style = "list-style: none;" margin = "0 auto;">
+            <li>
+                <img src = "./example3.png" alt = "error" width = "75%"/>
+            </li>
+        </ul>
+    </body>
+</html>
